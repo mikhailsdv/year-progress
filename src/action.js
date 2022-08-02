@@ -1,7 +1,7 @@
 const {BOT_TOKEN, BAR_LENGTH, CHANNEL_ID, DEBUG_CHAT_ID} = process.env
 
 const {Telegram} = require("telegraf")
-const {getDaysInYear, endOfYear, addYears, getDayOfYear, isLeapYear} = require("date-fns")
+const {getDaysInYear, getDayOfYear} = require("date-fns")
 const {saveLastPercent, getLastPercent} = require("./db.js")
 
 const telegram = new Telegram(BOT_TOKEN)
@@ -19,7 +19,6 @@ module.exports = async () => {
 		const filledPartLength = Math.floor(BAR_LENGTH * percent) //symbol repeat
 
 		if (percentFloor !== lastPercent) {
-			await saveLastPercent(percentFloor)
 			const message =
 				"▓".repeat(filledPartLength) +
 				"░".repeat(BAR_LENGTH - filledPartLength) +
@@ -28,6 +27,7 @@ module.exports = async () => {
 				"%"
 
 			await telegram.sendMessage(CHANNEL_ID, message)
+			await saveLastPercent(percentFloor)
 		}
 	} catch (err) {
 		DEBUG_CHAT_ID &&
