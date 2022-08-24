@@ -35,12 +35,13 @@ module.exports = async () => {
 			await saveLastPercent(percentNatural)
 		}
 	} catch (err) {
-		console.log(err)
+		console.error(err)
 		DEBUG_CHAT_ID &&
 			(await telegram.sendMessage(
 				DEBUG_CHAT_ID,
-				`${err.toString()}\n${JSON.stringify(
+				JSON.stringify(
 					{
+						error: `${err.name}: ${err.message}`,
 						startOfYear,
 						endOfYear,
 						timePastStartOfYear,
@@ -52,7 +53,7 @@ module.exports = async () => {
 					},
 					null,
 					2
-				)}`
+				)
 			))
 	}
 }
