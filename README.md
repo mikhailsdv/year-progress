@@ -4,7 +4,7 @@ Telegram channel that monitors year progress in percents.
 
 ## [Deta](https://www.deta.sh/)
 
-This project is hosted on [Deta Micros](https://docs.deta.sh/docs/micros/about). It uses [Deta Base](https://docs.deta.sh/docs/base/about) to save the progress state and [Deta Cron](https://docs.deta.sh/docs/micros/cron) to execute the script every day.
+This project is hosted on [Deta Micros](https://docs.deta.sh/docs/micros/about). It uses [Deta Base](https://docs.deta.sh/docs/base/about) to save the progress state and [Deta Cron](https://docs.deta.sh/docs/micros/cron) to execute the script every 2 minutes.
 
 ## How to set up?
 
@@ -35,10 +35,10 @@ npm i
 deta update -e .env
 ```
 
-7. Set a cron job:
+7. Set a cron job to automatically execute the script every 2 minutes:
 
 ```
-deta cron set "0 14 * * ? *" //run at 14:00 am(UTC) every day
+deta cron set "0/2 * * * ? *"
 ```
 
 That's it. If nothing works, try running your code manually:
@@ -51,5 +51,5 @@ node src/test.js
 
 ## Links
 
-1. [Channel itself](https://t.me/YearProgressBar);
-2. [Developer's blog](https://t.me/FilteredInternet).
+- [Channel itself](https://t.me/YearProgressBar).
+- [Developer's blog](https://t.me/FilteredInternet).
